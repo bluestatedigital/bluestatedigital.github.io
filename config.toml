@@ -6,7 +6,7 @@ description = "The BSD Tools are designed to help you manage and grow inspiring,
 Paginate = 4
 [Params]
   RSSLink = "/index.xml"
-  author = "Blue State Digital" # add your company name
+  author = "BSD Tools Engineering" # add your company name
   github = "" # add your github profile name
   twitter = "" # add your twitter profile
   email = "tools@bluestatedigital.com"
