@@ -34,6 +34,17 @@ We were perplexed. So we filed a support ticket with AWS, and ultimately, after 
 I have heard back from the internal team regarding the error ... This has been identified as a bug where temporary table sub-query with a select throws an error. 
 ```
 
-And so we found a bug in Aurora. With a relatively small change in our query, our application was back up with little effort. Later that week, we went digging into the MySQL source and found a [test case we believe replicates this issue](https://github.com/mysql/mysql-server/blob/5.6/mysql-test/t/read_only_innodb.test#L195).
+So, we found a bug in Aurora MySQL. With a relatively small change in our query, we were able to get the same data:
+
+```
+create temporary table test0 (
+  c1 int(11),
+  c2 int (11)
+);
+
+insert into test0 select 1, count(*) from mysql.user;
+```
+
+And our application was back up with little effort, Later that week, we went digging into the MySQL source and found a [test case we believe replicates this issue](https://github.com/mysql/mysql-server/blob/5.6/mysql-test/t/read_only_innodb.test#L195).
 
 Aurora has done a lot to reduce our operational load. But in this migration, and with this bug we found, we got a better taste of what life is like on the relative edge of database technologies. Sometimes, you're going to find unexpected hiccups, and that's part of the price of greener services.
